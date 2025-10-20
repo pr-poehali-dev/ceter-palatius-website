@@ -188,18 +188,23 @@ const Index = () => {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${products[1].image})` }}
         >
-          <div className="absolute inset-0 bg-primary/60"></div>
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(45, 45, 45, 0.3)' }}></div>
         </div>
         <div className="relative z-10 text-center text-primary-foreground px-4 animate-fade-in">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
             Эстетика вашего дома
           </h2>
-          <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto" style={{ color: '#D4D4D4' }}>
             Посуда, которая вдохновляет на кулинарные подвиги
           </p>
           <Button 
             size="lg"
-            className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-6 text-lg hover-scale"
+            className="px-8 py-6 text-lg hover-scale"
+            style={{ 
+              backgroundColor: '#C0A080', 
+              color: '#2D2D2D',
+              border: 'none'
+            }}
             onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Смотреть коллекцию
@@ -227,12 +232,20 @@ const Index = () => {
                   />
                   <button
                     onClick={() => toggleFavorite(product.id)}
-                    className="absolute top-4 right-4 bg-card/90 rounded-full p-2 hover:bg-accent transition-colors duration-300"
+                    className="absolute top-4 right-4 rounded-full p-2 transition-colors duration-300"
+                    style={{ 
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#C0A080'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)'}
                   >
                     <Icon 
                       name="Heart" 
                       size={20} 
-                      className={favorites.includes(product.id) ? 'fill-accent text-accent' : 'text-foreground'}
+                      style={{
+                        color: favorites.includes(product.id) ? '#C0A080' : '#2D2D2D',
+                        fill: favorites.includes(product.id) ? '#C0A080' : 'none'
+                      }}
                     />
                   </button>
                 </div>
@@ -247,14 +260,30 @@ const Index = () => {
                         key={i} 
                         name="Star" 
                         size={16} 
-                        className={i < product.rating ? 'fill-accent text-accent' : 'text-muted'}
+                        style={{
+                          color: i < product.rating ? '#C0A080' : '#D4D4D4',
+                          fill: i < product.rating ? '#C0A080' : 'none'
+                        }}
                       />
                     ))}
                   </div>
-                  <p className="text-2xl font-bold mb-4 text-foreground">{product.price.toLocaleString()} ₽</p>
+                  <p className="text-2xl font-bold mb-4" style={{ color: '#2D2D2D' }}>{product.price.toLocaleString()} ₽</p>
                   <Button 
                     variant="outline"
-                    className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                    className="w-full transition-all duration-300"
+                    style={{
+                      borderColor: '#C0A080',
+                      color: '#C0A080',
+                      backgroundColor: 'transparent'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#C0A080';
+                      e.currentTarget.style.color = '#FFFFFF';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = '#C0A080';
+                    }}
                     onClick={() => addToCart(product)}
                   >
                     В корзину
@@ -266,10 +295,10 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="about" className="bg-primary text-primary-foreground py-20 px-4">
+      <section id="about" className="py-20 px-4" style={{ backgroundColor: '#2D2D2D' }}>
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">О нас</h2>
-          <p className="text-lg md:text-xl leading-relaxed text-primary-foreground/90">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8" style={{ color: '#F5F5F5' }}>О нас</h2>
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: '#D4D4D4' }}>
             Ceter Palatius — это премиум коллекция посуды для тех, кто ценит качество и эстетику. 
             Мы создаем не просто предметы сервировки, а произведения искусства, которые превращают 
             каждый прием пищи в особенное событие. Наша миссия — вдохновлять людей на создание 
@@ -278,34 +307,52 @@ const Index = () => {
         </div>
       </section>
 
-      <footer id="contact" className="bg-primary text-primary-foreground py-12 px-4">
+      <footer id="contact" className="py-12 px-4" style={{ backgroundColor: '#2D2D2D' }}>
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">Ceter Palatius</h3>
-              <p className="text-primary-foreground/80">Премиум посуда для вашего дома</p>
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>Ceter Palatius</h3>
+              <p style={{ color: '#D4D4D4' }}>Премиум посуда для вашего дома</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Контакты</h4>
-              <p className="text-primary-foreground/80 mb-2">Email: info@ceterpalatius.ru</p>
-              <p className="text-primary-foreground/80">Телефон: +7 (495) 123-45-67</p>
+              <h4 className="font-semibold mb-4" style={{ color: '#F5F5F5' }}>Контакты</h4>
+              <p style={{ color: '#D4D4D4' }} className="mb-2">Email: info@ceterpalatius.ru</p>
+              <p style={{ color: '#D4D4D4' }}>Телефон: +7 (495) 123-45-67</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Социальные сети</h4>
+              <h4 className="font-semibold mb-4" style={{ color: '#F5F5F5' }}>Социальные сети</h4>
               <div className="flex gap-4">
-                <a href="#" className="hover:text-accent transition-colors duration-300">
+                <a 
+                  href="#" 
+                  className="transition-colors duration-300"
+                  style={{ color: '#D4D4D4' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#C0A080'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#D4D4D4'}
+                >
                   <Icon name="Instagram" size={24} />
                 </a>
-                <a href="#" className="hover:text-accent transition-colors duration-300">
+                <a 
+                  href="#" 
+                  className="transition-colors duration-300"
+                  style={{ color: '#D4D4D4' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#C0A080'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#D4D4D4'}
+                >
                   <Icon name="Facebook" size={24} />
                 </a>
-                <a href="#" className="hover:text-accent transition-colors duration-300">
+                <a 
+                  href="#" 
+                  className="transition-colors duration-300"
+                  style={{ color: '#D4D4D4' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#C0A080'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#D4D4D4'}
+                >
                   <Icon name="Mail" size={24} />
                 </a>
               </div>
             </div>
           </div>
-          <div className="border-t border-primary-foreground/20 pt-8 text-center text-primary-foreground/60">
+          <div className="pt-8 text-center" style={{ borderTop: '1px solid #555555', color: '#888888' }}>
             <p>© 2025 Ceter Palatius. Все права защищены.</p>
           </div>
         </div>
